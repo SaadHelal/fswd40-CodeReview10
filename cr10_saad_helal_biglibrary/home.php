@@ -108,7 +108,22 @@ $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
         <hr>
         <section id="books">
         <?php
-$sql = "SELECT * FROM books";
+$sql = "SELECT
+`books`.`book_id`,
+`books`.`title`,
+`books`.`img`,
+`books`.`type`,
+`books`.`ISBN_code`,
+`books`.`publish_date`,
+`books`.`description`,
+`publisher`.`name`,
+`author`.`first_name`,
+`author`.`last_name`
+FROM `books`
+LEFT JOIN `publisher`
+ON `books`.`fk_publisher_id`= `publisher`.`publisher_id`
+LEFT JOIN `author`
+ON `books`.`fk_author_id`= `author`.`author_id` ";
         $result = mysqli_query($conn, $sql);
         
         
@@ -125,8 +140,15 @@ $sql = "SELECT * FROM books";
                         </tr>
                       </thead>";		
                     while($row = mysqli_fetch_array($result)) {	
-               echo"<tr><td>{$row['title']}</td><td><img src='{$row['img']}'width='150'></td><td>{$row['fk_author_id']}</td><td>{$row['fk_publisher_id']}</td><td>{$row['ISBN_code']}</td><td>{$row['publish_date']}</td><td>{$row['description']}</td></tr>";
-        };
+                    
+                        echo    "<tr><td>{$row['title']}</td>
+                                <td><img src='{$row['img']}'width='150'></td>
+                                <td>{$row['first_name']} {$row['last_name']}</td>
+                                <td>{$row['name']}</td>
+                                <td>{$row['ISBN_code']}</td>
+                                <td>{$row['publish_date']}</td>
+                                <td>{$row['description']}</td></tr>";
+                };
         echo "</table>";
         ?>
         </section>
@@ -135,7 +157,21 @@ $sql = "SELECT * FROM books";
         <hr>
         <section id="CDs">
         <?php
-        $sql = "SELECT * FROM cds";
+        $sql = "SELECT
+        `cds`.`CD_id`,
+        `cds`.`title`,
+        `cds`.`img`,
+        `cds`.`type`,
+        `cds`.`publish_date`,
+        `cds`.`description`,
+        `producer`.`name`,
+        `author`.`first_name`,
+        `author`.`last_name`
+        FROM `cds`
+        LEFT JOIN `producer`
+        ON `cds`.`fk_producer_id`= `producer`.`producer_id`
+        LEFT JOIN `author`
+        ON `cds`.`fk_author_id`= `author`.`author_id` ";
         $result = mysqli_query($conn, $sql);
         
         
@@ -151,7 +187,12 @@ $sql = "SELECT * FROM books";
                         </tr>
                       </thead>";		
                     while($row = mysqli_fetch_array($result)) {	
-               echo"<tr><td>{$row['title']}</td><td><img src='{$row['img']}'width='150'></td><td>{$row['fk_author_id']}</td><td>{$row['fk_producer_id']}</td><td>{$row['publish_date']}</td><td>{$row['description']}</td></tr>";
+               echo"<tr><td>{$row['title']}</td>
+               <td><img src='{$row['img']}'width='150'></td>
+               <td>{$row['first_name']} {$row['last_name']}</td>
+               <td>{$row['name']}</td>
+               <td>{$row['publish_date']}</td>
+               <td>{$row['description']}</td></tr>";
                
             };
         echo "</table>";
@@ -165,7 +206,21 @@ $sql = "SELECT * FROM books";
         <hr>
         <section id="DVDs">
         <?php
-        $sql = "SELECT * FROM dvds";
+        $sql = "SELECT
+        `dvds`.`DVD_id`,
+        `dvds`.`title`,
+        `dvds`.`img`,
+        `dvds`.`type`,
+        `dvds`.`publish_date`,
+        `dvds`.`description`,
+        `producer`.`name`,
+        `author`.`first_name`,
+        `author`.`last_name`
+        FROM `dvds`
+        LEFT JOIN `producer`
+        ON `dvds`.`fk_producer_id`= `producer`.`producer_id`
+        LEFT JOIN `author`
+        ON `dvds`.`fk_author_id`= `author`.`author_id` ";
         $result = mysqli_query($conn, $sql);
         
         
@@ -181,7 +236,12 @@ $sql = "SELECT * FROM books";
                         </tr>
                       </thead>";		
                     while($row = mysqli_fetch_array($result)) {	
-               echo"<tr><td>{$row['title']}</td><td><img src='{$row['img']}' width='150'></td><td>{$row['fk_author_id']}</td><td>{$row['fk_producer_id']}</td><td>{$row['publish_date']}</td><td>{$row['description']}</td></tr>";
+               echo"<tr><td>{$row['title']}</td>
+               <td><img src='{$row['img']}' width='150'></td>
+               <td>{$row['first_name']} {$row['last_name']}</td>
+               <td>{$row['name']}</td>
+               <td>{$row['publish_date']}</td>
+               <td>{$row['description']}</td></tr>";
         };
         echo "</table>";
         ?>
